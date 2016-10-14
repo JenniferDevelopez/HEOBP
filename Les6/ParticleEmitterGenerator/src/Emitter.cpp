@@ -3,10 +3,10 @@
 
 Emitter::Emitter()
 {
-	ePosition = ofPoint(ofGetMouseX(), ofGetMouseY);
+	ePosition = ofPoint(ofGetMouseX(), ofGetMouseY());
 	eOrigin = ePosition; //Set origin to begin value of ePosition.
 	
-	eAngle = ofVec2f(ofRandomf(-0.2, 0.2));
+	eAngle = ofVec2f(ofRandomf()+ofRandomf());
 	eSpeed = ofVec2f(ofRandom(-2, 2), ofRandom(-2, 2));
 	
 	eLifeTime = 0;
@@ -15,23 +15,25 @@ Emitter::Emitter()
 
 Emitter::~Emitter()
 {
-
+	
 }
 
-void Emitter::setOrigin(int x, int y)
-{
-	eOriginX = x;
-	eOriginY = y;
-}
-
-void Emitter::update()
+void Emitter::move()
 {
 	ePosition += eSpeed;
 	eAngle.rotate(2);
 	ePosition += eAngle;
 
 	eLifeTime++;
+
+	for (unsigned int i = 0; i < particles.size(); i++)
+	{
+
+		particles[i]->move();
+	}
+
 }
+
 
 bool Emitter::isDead()
 {
@@ -39,18 +41,33 @@ bool Emitter::isDead()
 }
 
 
-Particle* Emitter::emit()
+void Emitter::emit()
 {
+	Particle* newParticle;
 
 	//Particle setup and instances.
 	if (ofGetFrameNum() % 5 == 0)
 	{
-		Particle* newParticle = new Particle(eOrigin.x, eOrigin.y);
-		Particle* particles[i].push_back(newParticle);
-	}
+		eAngle = ofVec2f(ofRandomf() + ofRandomf());
+		eSpeed = ofVec2f(ofRandom(-2, 2), ofRandom(-2, 2));
 
-	for (unsigned int i = 0; i < particles.size(); i++)
+		newParticle = new Particle(eOrigin.x, eOrigin.y);
+
+		centerColor = ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255), 255);
+		innerColor = ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255), 127);
+		outerColor = ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255), 15);
+		// GENERATOR RANDOM COLORS FOR EVERY NEW PARTICLE
+		newParticle->setColors(centerColor, innerColor, outerColor);
+
+		particles.push_back(newParticle);
+	}
+}
+
+void Emitter::draw()
+{
+
+	for (int i = 0; i < particles.size(); i++)
 	{
-		newParticle -> move();
+		particles[i] -> draw();
 	}
 }

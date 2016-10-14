@@ -1,10 +1,11 @@
 
 #include "ofApp.h"
+#include "ofMain.h"
 
 
 void ofApp::setup(){
 
-	ofBackground(ofColor::darkGray);
+	ofSetFrameRate(60);
 
 }
 
@@ -13,13 +14,12 @@ void ofApp::update()
 	if (ofGetFrameNum() % 5 == 0)
 	{
 		Emitter* newEmitter = new Emitter();
-		newEmitter->emit();
-		newEmitter->setOrigin();
 		emitters.push_back(newEmitter);
 	}
 
-	for (unsigned int i = 0; i < particles.size(); ++i) {
-		emitters[i]->update();
+	for (unsigned int i = 0; i < emitters.size(); ++i) {
+		emitters[i]->emit();
+		emitters[i]->move();
 	}
 
 	// reaper.cleanup(particles);
@@ -28,12 +28,10 @@ void ofApp::update()
 
 void ofApp::draw(){
 
+	ofSetBackgroundColor(10, 3, 2);
+
 	for (unsigned int i = 0; i < emitters.size(); ++i) {
 		emitters[i]->draw();
-	}
-
-	for (unsigned int i = 0; i < particles.size(); ++i) {
-		particles[i]->draw();
 	}
 
 }

@@ -8,24 +8,25 @@
 #include "Emitter.h"
 #include "Reaper.h"
 
-class ofApp : public ofBaseApp{
-
+class ofApp : public ofBaseApp
+{
 	public:
+
 		void setup();
 		void update();
 		void draw();
 
 		void keyPressed(int key);
 		
-	private:
+		vector <Emitter*> emitters;
 
-		vector<Emitter*> emitters;
+		vector <Particle*> particles;
 
 		Reaper reaper;
 
 		/*
 		ofxPanel gui;
 		ofxParamGroup guiSettings;
-
 		*/
+
 };

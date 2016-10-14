@@ -6,15 +6,16 @@ Particle::Particle(int x, int y)
 	radius = ofRandom(1, 15);
 	position = ofPoint(x, y);
 
-	speed = ofVec2f(ofRandom(-2, 2), ofRandom(-2, 2));
+	speed = ofVec2f(ofRandom(-4, 4), ofRandom(-4, 4));
+	pAngle = ofVec2f(ofRandomf() + ofRandomf());
 
-	centerColor = ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255), 255);
-	innerColor = ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255), 127);
-	outerColor = ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255), 15);
+	centerColor = 0;
+	innerColor	= 0;
+	outerColor	= 0;
 
 	lifeTime = 0;
 
-	double MAX_lifeTime = 150 * (ofRandomf(0.8, 1.2));
+	MAX_lifeTime = 150 * (ofRandom(0.8, 1.2));
 }
 
 
@@ -24,9 +25,9 @@ Particle::~Particle()
 
 void Particle::move()
 {
-	position += eSpeed;
+	position += speed;
 	pAngle.rotate(2);
-	position += eAngle;
+	position += pAngle;
 }
 
 void Particle::setColors(ofColor cColor, ofColor iColor, ofColor oColor)
@@ -39,7 +40,7 @@ void Particle::setColors(ofColor cColor, ofColor iColor, ofColor oColor)
 void Particle::draw()
 {
 	ofEnableAlphaBlending();
-	ofEnableBlendMode(OF_BLENDMODE_ADD); // Playing with blendmodes.
+	ofEnableBlendMode(OF_BLENDMODE_ADD); // Playing with blend modes.
 
 	ofSetColor(centerColor);
 	ofDrawCircle(position.x, position.y, radius *1.7);

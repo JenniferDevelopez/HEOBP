@@ -1,14 +1,16 @@
 
 #pragma once
 
-#include "ofApp.h"
+#include "ofMain.h"
+#include "Particle.h"
+#include "Emitter.h"
 
 class Reaper
 {
-public:
+	public:
 
-	void cleanup(vector<Particle*>& particles);
-	void cleanup(vector<Emitter*>& Emitters);
+		void cleanup(vector<Particle*>& particles);
+		void cleanup(vector<Emitter*>& emitters);
 
 };
 

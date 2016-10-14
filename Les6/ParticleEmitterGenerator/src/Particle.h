@@ -1,28 +1,28 @@
 #pragma once
 
-#include "ofApp.h"
+#include "ofMain.h"
 
 class Particle
 {
-public:
+	public:
 
-	Particle(int x, int y);
-	virtual ~Particle();
+		Particle(int x, int y);
+		virtual ~Particle();
 
-	virtual void move();
-	void draw();
-	void setColors(ofColor cColor, ofColor iColor, ofColor oColor);
+		virtual void move();
+		void draw();
+		void setColors(ofColor cColor, ofColor iColor, ofColor oColor);
 	
-	bool isDead();
+		bool isDead();
 
-protected:
+	protected:
 
-	ofPoint position;
-	float radius;
-	ofVec2f speed, pAngle;
-	long lifeTime;
+		ofPoint position;
+		float radius;
+		ofVec2f speed, pAngle;
+		long lifeTime, MAX_lifeTime;
 
-	ofColor centerColor, innerColor, outerColor;
+		ofColor centerColor, innerColor, outerColor;
 
 };
 
