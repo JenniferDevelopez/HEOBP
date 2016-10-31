@@ -21,6 +21,7 @@ class Reaper
 
 		Reaper();
 
+		// Now we have a Singleton.
 		static Reaper* theReaper;
 
 };

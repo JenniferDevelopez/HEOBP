@@ -18,15 +18,12 @@ class ofApp : public ofBaseApp
 
 		void keyPressed(int key);
 		
+		// Create emitter list
 		vector <Emitter*> emitters;
 
+		// Create particle list
 		vector <Particle*> particles;
 
 		Reaper reaper;
-
-		/*
-		ofxPanel gui;
-		ofxParamGroup guiSettings;
-		*/
 
 };

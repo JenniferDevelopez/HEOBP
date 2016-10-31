@@ -9,6 +9,7 @@ Emitter::Emitter()
 	eAngle = ofVec2f(ofRandomf()+ofRandomf());
 	eSpeed = ofVec2f(ofRandom(-2, 2), ofRandom(-2, 2));
 	
+	// Set emitter life-time.
 	eLifeTime = 0;
 	MAX_eLifeTime = 100;
 }
@@ -20,12 +21,15 @@ Emitter::~Emitter()
 
 void Emitter::move()
 {
+	// Move, rotate
 	ePosition += eSpeed;
 	eAngle.rotate(2);
 	ePosition += eAngle;
 
+	// Increment life-time
 	eLifeTime++;
 
+	// All particles of this emitter instance move ( ofApp > update )
 	for (unsigned int i = 0; i < particles.size(); i++)
 	{
 
@@ -43,23 +47,25 @@ bool Emitter::isDead()
 
 void Emitter::emit()
 {
+	// Generate new particles and push them into the list.
 	Particle* newParticle;
 
-	//Particle setup and instances.
+	//Ceate a particle, every two frames.
 	if (ofGetFrameNum() % 2 == 0)
 	{
+		// Set variables random per particle.
 		eAngle = ofVec2f(ofRandomf() + ofRandomf());
 		eSpeed = ofVec2f(ofRandom(-2, 2), ofRandom(-2, 2));
 
 		newParticle = new Particle(eOrigin.x, eOrigin.y);
 
+		// Generate random color again.
 		centerColor = ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255), 255);
 		innerColor = ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255), 127);
 		outerColor = ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255), 15);
-		// GENERATOR RANDOM COLORS FOR EVERY NEW PARTICLE
+
 		newParticle->setColors(centerColor, innerColor, outerColor);
 
-		//return newParticle; 
 		particles.push_back(newParticle);
 	}
 }

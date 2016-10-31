@@ -15,6 +15,7 @@ Particle::Particle(int x, int y)
 
 	lifeTime = 0;
 
+	// Make a the life-time a little bit different for every particle.
 	MAX_lifeTime = 50 * (ofRandom(0.8, 1.2));
 }
 
@@ -40,7 +41,8 @@ void Particle::setColors(ofColor cColor, ofColor iColor, ofColor oColor)
 void Particle::draw()
 {
 	ofEnableAlphaBlending();
-	ofEnableBlendMode(OF_BLENDMODE_ADD); // Playing with blend modes.
+	// Particles that overlap get brighter.
+	ofEnableBlendMode(OF_BLENDMODE_ADD);
 
 	ofSetColor(centerColor);
 	ofDrawCircle(position.x, position.y, radius *1.7);
@@ -53,8 +55,6 @@ void Particle::draw()
 	ofDrawCircle(position.x, position.y, radius *0.17);
 
 }
-
-
 
 bool Particle::isDead()
 {

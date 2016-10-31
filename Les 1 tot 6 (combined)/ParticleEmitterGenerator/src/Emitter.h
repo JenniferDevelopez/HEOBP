@@ -15,15 +15,18 @@ class Emitter
 		void draw();
 		void emit();
 		
+		// Create a list to store the particles.
 		vector <Particle*> particles;
 
 		bool isDead();
 
+		// Emitter properties.
 		ofPoint ePosition, eOrigin;
 		ofColor centerColor, innerColor, outerColor;
 
 	private:
 
+		// Private Emitter properties/
 		int eLifeTime, MAX_eLifeTime;
 		ofVec2f eSpeed, eAngle;
 
